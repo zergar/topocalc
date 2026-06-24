@@ -26,12 +26,6 @@ class build_ext(_build_ext):
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
-with open('requirements.txt') as requirements_file:
-    requirements = requirements_file.read()
-
-setup_requirements = ['setuptools_scm']
-
-test_requirements = []
 
 # Give user option to specify their local compiler name
 if "CC" not in os.environ:
@@ -75,7 +69,6 @@ setup(
             'topocalc=topocalc.cli:main',
         ],
     },
-    install_requires=requirements,
     license="CC0 1.0",
     long_description=readme,
     long_description_content_type="text/markdown",
@@ -83,9 +76,7 @@ setup(
     keywords='topocalc',
     name='topocalc',
     packages=find_packages(include=['topocalc', 'topocalc.*']),
-    setup_requires=setup_requirements,
     test_suite='topocalc.tests',
-    tests_require=test_requirements,
     cmdclass=cmdclass,
     ext_modules=ext_modules,
     url='https://github.com/USDA-ARS-NWRC/topocalc',

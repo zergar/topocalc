@@ -1,0 +1,83 @@
+[build-system]
+requires = ["uv>=0.1.0", "setuptools>=61.0.0", "wheel", "numpy", "cython>=0.29.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "topocalc"
+dynamic = ["version"]
+description = "Topo calculations like gradient and sky view"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "CC0 1.0"}
+authors = [
+    {name = "USDA ARS NWRC", email = "snow@ars.usda.gov"}
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+keywords = ["topocalc"]
+dependencies = [
+    # Add your dependencies from requirements.txt here
+    # For example:
+    # "numpy",
+    # "scipy",
+    "numpy>=1.15",
+    "Click>=7.0",
+    "spatialnc>=0.2.12",
+]
+[project.urls]
+Homepage = "https://github.com/USDA-ARS-NWRC/topocalc"
+
+[project.scripts]
+topocalc = "topocalc.cli:main"
+
+[tool.setuptools]
+packages = [
+    "topocalc",
+    "topocalc.core_c",
+    "topocalc.tests",
+]
+include-package-data = true
+zip-safe = false
+ext-modules = [
+    {name = "topocalc.core_c.topo_core", sources = [
+         "topocalc/core_c/topo_core.pyx",
+         "topocalc/core_c/hor1d.c",
+     ]}
+]
+
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+
+[dependency-groups]
+dev = [
+    "Cython>=0.29",
+    "netCDF4>=1.2.9",
+    "wheel==0.33.6",
+    "watchdog==6.0.0",
+    "flake8==3.7.8",
+    "coverage",
+    "Sphinx==1.8.5",
+    "twine==1.14.0",
+    "jupyterlab",
+    "isort",
+    "matplotlib",
+    "rasterio",
+    "coveralls",
+    "pandas",
+    "PyYAML"
+]
+
